@@ -1,0 +1,27 @@
+DROP DATABASE IF EXISTS music_db;
+CREATE DATABASE music_db;
+
+\music_db
+
+DROP TABLE IF EXISTS artist;
+CREATE TABLE artist(
+id SERIAL PRIMARY KEY,
+name VARCHAR(40) NOT NULL,
+date_of_birth DATE NOT NULL,
+FOREIGN KEY (release_date) REFERENCES (album)
+FOREIGN KEY (song) REFERENCES song
+);
+
+DROP TABLE IF EXISTS album;
+CREATE TABLE album(
+release_date DATE NOT NULL,
+song_title VARCHAR(40) NOT NULL
+FOREIGN KEY (song) REFERENCES song
+);
+
+DROP TABLE IF EXISTS song;
+CREATE TABLE song(
+FOREIGN KEY (artist) REFERENCES (artist)
+release_date DATE NOT NULL,
+song_length TIME NOT NULL
+);
